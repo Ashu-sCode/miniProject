@@ -24,7 +24,7 @@ CREATE TABLE quizzes (
   FOREIGN KEY (created_by) REFERENCES users(id)
 );
 
--- Questions table
+-- Questions tables
 CREATE TABLE questions (
   id INT AUTO_INCREMENT PRIMARY KEY,
   quiz_id INT NOT NULL,

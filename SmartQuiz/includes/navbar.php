@@ -22,14 +22,14 @@ $user_role = $_SESSION['user_role'] ?? 'user';
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto">
             <?php if ($is_logged_in && $user_role === 'user'): ?>
-                <li class="nav-item"><a class="nav-link" href="/SmartQuiz/user/dashboard.php">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="/SmartQuiz/user/quiz_list.php">Take Quiz</a></li>
-                <li class="nav-item"><a class="nav-link" href="/SmartQuiz/user/results.php">Results</a></li>
+                <li class="nav-item"><a class="nav-link" href="../user/dashboard.php">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="../user/quiz_list.php">Take Quiz</a></li>
+                <li class="nav-item"><a class="nav-link" href="../user/results.php">Results</a></li>
             <?php elseif ($is_logged_in && $user_role === 'admin'): ?>
-                <li class="nav-item"><a class="nav-link" href="/SmartQuiz/admin/dashboard.php">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="/SmartQuiz/admin/manage_quiz.php">Manage Quizzes</a></li>
-                <li class="nav-item"><a class="nav-link" href="/SmartQuiz/admin/manage_users.php">Manage Users</a></li>
-                <li class="nav-item"><a class="nav-link" href="/SmartQuiz/admin/admin_results.php">Results</a></li>
+                <li class="nav-item"><a class="nav-link" href="../admin/dashboard.php">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="../admin/manage_quiz.php">Manage Quizzes</a></li>
+                <li class="nav-item"><a class="nav-link" href="../admin/manage_users.php">Manage Users</a></li>
+                <li class="nav-item"><a class="nav-link" href="../admin/admin_results.php">Results</a></li>
             <?php endif; ?>
         </ul>
 
