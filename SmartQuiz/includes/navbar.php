@@ -53,10 +53,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
                        href="<?= $base_url ?>admin/quizzes/manage.php">Manage Quizzes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= ($current_page === 'manage_users.php') ? 'active' : '' ?>" 
-                       href="<?= $base_url ?>admin/user/manage_users.php">Manage Users</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link <?= ($current_page === 'admin_results.php') ? 'active' : '' ?>" 
                        href="<?= $base_url ?>admin/admin_results.php">Results</a>
                 </li>

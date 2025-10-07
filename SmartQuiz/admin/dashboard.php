@@ -32,16 +32,10 @@ if ($_SESSION['user_role'] !== 'admin') {
                 <div class="card bg-primary text-white p-4">
                     <h4>📝 Manage Quizzes</h4>
                     <p>Add, edit or delete quizzes.</p>
-                    <a href="manage_quiz.php" class="btn btn-light btn-sm mt-2">Open</a>
+                    <a href="quizzes/manage.php" class="btn btn-light btn-sm mt-2">Open</a>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card bg-success text-white p-4">
-                    <h4>👥 Manage Users</h4>
-                    <p>View and manage registered users.</p>
-                    <a href="manage_users.php" class="btn btn-light btn-sm mt-2">Open</a>
-                </div>
-            </div>
+   
             <div class="col-md-4">
                 <div class="card bg-warning text-dark p-4">
                     <h4>📈 View Results</h4>

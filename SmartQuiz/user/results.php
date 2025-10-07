@@ -19,66 +19,100 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>My Quiz Results | Quiz System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { font-family: 'Poppins', sans-serif; background: #f8fafc; }
-        .results-container { max-width: 900px; margin: 50px auto; }
-        .card { border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 20px; }
-        table { margin-top: 20px; }
-        th, td { vertical-align: middle !important; }
-        .highlight { background-color: #d1e7dd !important; font-weight: bold; }
-    </style>
+<meta charset="UTF-8">
+<title>My Quiz Results | Quiz System</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #74ABE2, #5563DE);
+    min-height: 100vh;
+    margin: 0;
+    color: #fff;
+}
+.results-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 0 15px;
+}
+h2 { text-align: center; margin-bottom: 30px; font-weight: 700; }
+
+/* Panel-style results */
+.result-panel {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+.result-panel:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+.result-panel h4 {
+    margin: 0;
+    font-weight: 600;
+}
+.result-panel p {
+    margin: 5px 0;
+    color: rgba(255,255,255,0.85);
+}
+.result-panel .badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-weight: 600;
+}
+.result-panel .pass { background-color: #28a745; color: #fff; }
+.result-panel .fail { background-color: #ffc107; color: #333; }
+.result-panel a.btn {
+    margin-top: 10px;
+}
+
+/* Icon decoration */
+.result-panel i {
+    font-size: 2.5rem;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    opacity: 0.2;
+}
+
+@media(max-width: 576px){
+    .result-panel { padding: 1rem 1.5rem; }
+}
+</style>
 </head>
 <body>
 <?php include '../includes/navbar.php'; ?>
 
 <div class="results-container">
-    <div class="card">
-        <h2 class="text-center">My Quiz Results</h2>
+    <h2>My Quiz Results</h2>
 
-        <?php if (empty($results)): ?>
-            <p class="text-center text-muted mt-4">You haven't attempted any quizzes yet.</p>
-        <?php else: ?>
-            <table class="table table-striped table-hover mt-4">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Quiz Title</th>
-                        <th>Score</th>
-                        <th>Correct Answers</th>
-                        <th>Total Questions</th>
-                        <th>Date & Time</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($results as $index => $r): ?>
-                        <?php
-                            $highlight_class = 'highlight'; // since all rows are current user
-                            $retake = ($r['score'] < ($r['total_questions'] / 2));
-                        ?>
-                        <tr class="<?= $highlight_class ?>">
-                            <td><?= $index + 1 ?></td>
-                            <td><?= htmlspecialchars($r['quiz_title']) ?></td>
-                            <td><?= htmlspecialchars($r['score']) ?></td>
-                            <td><?= htmlspecialchars($r['correct_answers']) ?></td>
-                            <td><?= htmlspecialchars($r['total_questions']) ?></td>
-                            <td><?= htmlspecialchars($r['attempted_at']) ?></td>
-                            <td>
-                                <?php if ($retake): ?>
-                                    <a href="quiz.php?quiz_id=<?= $r['quiz_id'] ?>" class="btn btn-sm btn-warning">Retake Quiz</a>
-                                <?php else: ?>
-                                    <span class="text-success">Passed ✅</span>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php endif; ?>
-    </div>
+    <?php if (empty($results)): ?>
+        <p class="text-center text-light mt-4">You haven't attempted any quizzes yet.</p>
+    <?php else: ?>
+        <?php foreach ($results as $r): 
+            $retake = ($r['score'] < ($r['total_questions'] / 2));
+            $status_class = $retake ? 'fail' : 'pass';
+            $status_text = $retake ? 'Retake Recommended ⚠️' : 'Passed ✅';
+        ?>
+        <div class="result-panel">
+            <i class="bi bi-journal-check"></i>
+            <h4><?= htmlspecialchars($r['quiz_title']) ?></h4>
+            <p>Score: <?= htmlspecialchars($r['score']) ?> / <?= htmlspecialchars($r['total_questions']) ?></p>
+            <p>Correct Answers: <?= htmlspecialchars($r['correct_answers']) ?></p>
+            <p>Date: <?= htmlspecialchars($r['attempted_at']) ?></p>
+            <span class="badge <?= $status_class ?>"><?= $status_text ?></span>
+            <?php if ($retake): ?>
+                <a href="quiz.php?quiz_id=<?= $r['quiz_id'] ?>" class="btn btn-light btn-sm">Retake Quiz</a>
+            <?php endif; ?>
+        </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>
 </body>
 </html>
