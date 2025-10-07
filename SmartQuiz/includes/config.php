@@ -10,4 +10,7 @@ try {
 } catch(PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }
+
+$base_url = "/php-projects/Projects/MiniProjectBCA/SmartQuiz/";
+
 ?>
