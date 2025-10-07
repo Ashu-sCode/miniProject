@@ -49,12 +49,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
                        href="<?= $base_url ?>admin/dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= ($current_page === 'manage_quiz.php') ? 'active' : '' ?>" 
-                       href="<?= $base_url ?>admin/manage_quiz.php">Manage Quizzes</a>
+                    <a class="nav-link <?= ($current_page === 'manage.php') ? 'active' : '' ?>" 
+                       href="<?= $base_url ?>admin/quizzes/manage.php">Manage Quizzes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= ($current_page === 'manage_users.php') ? 'active' : '' ?>" 
-                       href="<?= $base_url ?>admin/manage_users.php">Manage Users</a>
+                       href="<?= $base_url ?>admin/user/manage_users.php">Manage Users</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= ($current_page === 'admin_results.php') ? 'active' : '' ?>" 
