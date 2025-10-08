@@ -4,8 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <title>SmartQuiz | Home</title>
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Custom CSS -->
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -159,8 +161,7 @@
   <!-- Overlay -->
   <div class="overlay" id="overlay" onclick="closePanel()"></div>
 
-
-
+  <!-- Script for the slide-in panel -->
   <script>
     function openPanel(type){
       document.getElementById('overlay').style.display = 'block';
@@ -170,13 +171,13 @@
         document.getElementById('registerPanel').classList.add('active');
       }
     }
-
+    // Close the panel
     function closePanel(){
       document.getElementById('overlay').style.display = 'none';
       document.getElementById('loginPanel').classList.remove('active');
       document.getElementById('registerPanel').classList.remove('active');
     }
-
+    // Switch between login and register
     function switchPanel(type){
       if(type==='login'){
         document.getElementById('registerPanel').classList.remove('active');
@@ -217,3 +218,4 @@
     </form>
     <a class="switch-link" onclick="switchPanel('login')">Already have an account? Login</a>
   </div>
+  <!-- End -->

@@ -15,22 +15,23 @@ $user_role = $_SESSION['user_role'] ?? 'user';
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
-<!-- ✅ Bootstrap Navbar -->
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
     <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="<?= $base_url ?>">
             <?= ($user_role === 'admin') ? "QuizMaster Admin" : "QuizMaster" ?>
         </a>
 
-        <!-- ✅ Navbar toggler (hamburger) -->
+        <!--  Navbar toggler (hamburger) -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- ✅ Collapsible Navbar -->
+        <!--  Collapsible Navbar -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
+                <!-- Navbar links -->
                 <?php if ($is_logged_in && $user_role === 'user'): ?>
                     <li class="nav-item">
                         <a class="nav-link <?= ($current_page === 'dashboard.php') ? 'active' : '' ?>"
@@ -67,7 +68,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     </li>
                 <?php endif; ?>
             </ul>
-
+             
+            <!--  User Section -->
             <ul class="navbar-nav ms-auto">
                 <?php if ($is_logged_in): ?>
                     <li class="nav-item">
