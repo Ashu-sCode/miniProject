@@ -49,27 +49,98 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title><?= htmlspecialchars($quiz['title']) ?> | Quiz</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-body { font-family: 'Poppins', sans-serif; background: #f0f4f8; }
-.quiz-container { max-width: 900px; margin: 50px auto; }
-.timer { background: #5563DE; color: #fff; padding: 10px 20px; border-radius: 10px; font-weight: bold; font-size: 1.2rem; display: inline-block; margin-bottom: 20px; }
-.card { border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); margin-bottom: 20px; transition: transform 0.2s; }
-.card:hover { transform: translateY(-3px); }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #e0e7ff, #f0f4f8);
+    min-height: 100vh;
+    margin: 0;
+    color: #1f2937;
+}
+
+.quiz-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 0 15px;
+}
+
+h2 { font-weight: 700; margin-bottom: 0.5rem; }
+p.description { margin-bottom: 30px; color: #4b5563; }
+
+.card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
 .card-body { padding: 20px; }
-.option-label { cursor: pointer; display: block; padding: 10px 15px; border-radius: 10px; transition: background 0.2s; margin-bottom: 10px; }
-.option-label:hover { background: rgba(85,99,222,0.1); }
-.form-check-input:checked + .option-label { background: rgba(85,99,222,0.3); }
+
+.option-label {
+    cursor: pointer;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 12px;
+    transition: background 0.2s, transform 0.2s;
+    margin-bottom: 10px;
+    background: rgba(85,99,222,0.05);
+}
+.option-label:hover { background: rgba(85,99,222,0.15); transform: translateX(3px); }
+.form-check-input:checked + .option-label {
+    background: rgba(85,99,222,0.35);
+    color: #1d4ed8;
+    font-weight: 600;
+}
+
+.timer {
+    background: #5563DE;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
 .result-popup {
     position: fixed; top:50%; left:50%;
     transform: translate(-50%, -50%);
     z-index:1050; width: 400px;
-    background: #fff; border-radius: 15px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    color: #1f2937;
+    border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-    padding: 30px; text-align:center; display:none;
+    padding: 30px;
+    text-align:center;
+    display:none;
 }
+.result-popup button {
+    background-color: #5563DE;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+.result-popup button:hover { background-color: #1d4ed8; }
+
 .overlay {
     position: fixed; top:0; left:0;
     width:100%; height:100%;
     background: rgba(0,0,0,0.5); display:none; z-index:1040;
+}
+
+@media(max-width: 576px){
+    .card-body h5 { font-size: 1rem; }
+    .option-label { padding: 8px 12px; font-size: 0.95rem; }
+    .timer { font-size: 1rem; padding: 6px 15px; }
 }
 </style>
 </head>
@@ -77,11 +148,11 @@ body { font-family: 'Poppins', sans-serif; background: #f0f4f8; }
 <?php include '../includes/navbar.php'; ?>
 
 <div class="quiz-container">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
         <h2><?= htmlspecialchars($quiz['title']) ?></h2>
         <div class="timer" id="timer"></div>
     </div>
-    <p class="text-muted mb-4"><?= htmlspecialchars($quiz['description'] ?? 'Challenge yourself!') ?></p>
+    <p class="description"><?= htmlspecialchars($quiz['description'] ?? 'Challenge yourself!') ?></p>
 
     <form method="POST" id="quizForm">
         <?php foreach ($questions as $index => $q): ?>
@@ -107,14 +178,13 @@ body { font-family: 'Poppins', sans-serif; background: #f0f4f8; }
     </form>
 </div>
 
-<!-- Result Popup -->
 <div class="overlay" id="overlay"></div>
 <div class="result-popup" id="resultPopup">
     <h3>Quiz Completed!</h3>
     <p><strong>Score:</strong> <?= $score ?> / <?= $total ?></p>
     <p><strong>Correct Answers:</strong> <?= $score ?></p>
     <p><strong>Total Questions:</strong> <?= $total ?></p>
-    <button class="btn btn-primary mt-2" id="closePopup">Close</button>
+    <button class="btn" id="closePopup">Close</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
