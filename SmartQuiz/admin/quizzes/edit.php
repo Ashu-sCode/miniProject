@@ -49,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,9 +56,82 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title>Edit Quiz | Admin Panel</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-    body { font-family: 'Poppins', sans-serif; background: #f0f4f8; }
-    .form-container { max-width: 700px; margin: 50px auto; }
-    .card { border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); padding: 30px; }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8fafc;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-container {
+        max-width: 700px;
+        margin: 60px auto;
+    }
+
+    .card {
+        border: none;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        padding: 35px;
+    }
+
+    h2 {
+        text-align: center;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 25px;
+    }
+
+    label {
+        font-weight: 500;
+        color: #374151;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        border: 1px solid #d1d5db;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 0.15rem rgba(59,130,246,0.25);
+    }
+
+    .alert {
+        border-radius: 10px;
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-primary {
+        background-color: #2563eb;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 30px;
+        transition: all 0.2s;
+    }
+
+    .btn-primary:hover {
+        background-color: #1e40af;
+        transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+        border-radius: 8px;
+        padding: 10px 25px;
+        background-color: #6b7280;
+        border: none;
+    }
+
+    .btn-secondary:hover {
+        background-color: #4b5563;
+    }
 </style>
 </head>
 <body>
@@ -67,11 +139,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="form-container">
     <div class="card">
-        <h2 class="mb-4 text-center">Edit Quiz</h2>
+        <h2>Edit Quiz</h2>
 
         <?php if (!empty($errors)): ?>
             <div class="alert alert-danger">
-                <?php foreach ($errors as $err) echo "<p>$err</p>"; ?>
+                <?php foreach ($errors as $err) echo "<p class='mb-0'>$err</p>"; ?>
             </div>
         <?php endif; ?>
 
@@ -82,7 +154,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST" action="">
             <div class="mb-3">
                 <label for="title" class="form-label">Quiz Title <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($quiz['title']) ?>" required>
+                <input type="text" class="form-control" id="title" name="title"
+                       value="<?= htmlspecialchars($quiz['title']) ?>" required>
             </div>
 
             <div class="mb-3">
@@ -92,12 +165,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="mb-3">
                 <label for="time_limit" class="form-label">Time Limit (minutes) <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" id="time_limit" name="time_limit" value="<?= intval($quiz['time_limit'] ?? 5) ?>" min="1" required>
+                <input type="number" class="form-control" id="time_limit" name="time_limit"
+                       value="<?= intval($quiz['time_limit'] ?? 5) ?>" min="1" required>
             </div>
 
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary px-5">Update Quiz</button>
-                <a href="manage.php" class="btn btn-secondary px-4">Back</a>
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary me-2">Update Quiz</button>
+                <a href="manage.php" class="btn btn-secondary">Back</a>
             </div>
         </form>
     </div>
