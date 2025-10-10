@@ -64,29 +64,44 @@ try {
     }
 
     echo '<div class="table-responsive">';
-    echo '<table class="table table-hover align-middle">';
-    echo '<thead><tr>
-            <th>#</th>
-            <th>User</th>
-            <th>Quiz</th>
-            <th>Score</th>
-            <th>Correct Answers</th>
-            <th>Total Questions</th>
-            <th>Date Taken</th>
-          </tr></thead><tbody>';
+    echo '<table class="table table-hover align-middle" style="border-radius:12px; overflow:hidden;">';
+    echo '<thead style="background:#111827; color:#fff;">
+            <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Quiz</th>
+                <th>Score</th>
+                <th>Correct Answers</th>
+                <th>Total Questions</th>
+                <th>Date Taken</th>
+            </tr>
+          </thead><tbody>';
     foreach ($results as $index => $r) {
-        echo '<tr>
-            <td>'.($index+1).'</td>
-            <td>'.htmlspecialchars($r['user_name']).'</td>
-            <td>'.htmlspecialchars($r['quiz_title']).'</td>
-            <td>'.intval($r['score']).'</td>
-            <td>'.intval($r['correct_answers']).'</td>
-            <td>'.intval($r['total_questions']).'</td>
-            <td>'.date('d M Y, H:i', strtotime($r['attempted_at'])).'</td>
-          </tr>';
+        echo '<tr style="transition: all 0.2s;">
+                <td>'.($index+1).'</td>
+                <td>'.htmlspecialchars($r['user_name']).'</td>
+                <td>'.htmlspecialchars($r['quiz_title']).'</td>
+                <td>'.intval($r['score']).'</td>
+                <td>'.intval($r['correct_answers']).'</td>
+                <td>'.intval($r['total_questions']).'</td>
+                <td>'.date('d M Y, H:i', strtotime($r['attempted_at'])).'</td>
+              </tr>';
     }
     echo '</tbody></table></div>';
 
 } catch (PDOException $e) {
     echo '<p class="text-danger">Database error: '.htmlspecialchars($e->getMessage()).'</p>';
 }
+?>
+<style>
+    .table-responsive {
+        margin-top: 20px;
+    }
+    table tbody tr:hover {
+        background-color: #f1f5f9;
+    }
+    table th, table td {
+        vertical-align: middle;
+        padding: 12px 15px;
+    }
+</style>
