@@ -21,7 +21,7 @@ try {
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
 body { 
-    background: #f0f4f8; 
+    background: #f0f4f8;
     font-family: 'Poppins', sans-serif; 
     color: #333;
 }

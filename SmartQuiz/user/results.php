@@ -26,23 +26,30 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <style>
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #74ABE2, #5563DE);
+    background: #f0f4f8;
     min-height: 100vh;
     margin: 0;
-    color: #fff;
+    color: #1f2937;
 }
+
 .results-container {
     max-width: 900px;
     margin: 50px auto;
     padding: 0 15px;
 }
-h2 { text-align: center; margin-bottom: 30px; font-weight: 700; }
 
-/* Panel-style results */
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* Glassy result panels */
 .result-panel {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
     padding: 1.5rem 2rem;
     margin-bottom: 20px;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -50,31 +57,39 @@ h2 { text-align: center; margin-bottom: 30px; font-weight: 700; }
 }
 .result-panel:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
 }
+
 .result-panel h4 {
-    margin: 0;
+    margin: 0 0 10px;
     font-weight: 600;
+    color: #111827;
 }
+
 .result-panel p {
-    margin: 5px 0;
-    color: rgba(255,255,255,0.85);
+    margin: 4px 0;
+    color: #374151;
 }
+
 .result-panel .badge {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     padding: 0.4rem 0.8rem;
     border-radius: 12px;
     font-weight: 600;
 }
-.result-panel .pass { background-color: #28a745; color: #fff; }
-.result-panel .fail { background-color: #ffc107; color: #333; }
+
+.result-panel .pass { background-color: #10b981; color: #fff; }
+.result-panel .fail { background-color: #f59e0b; color: #111827; }
+
 .result-panel a.btn {
     margin-top: 10px;
+    border-radius: 50px;
+    font-weight: 600;
 }
 
 /* Icon decoration */
 .result-panel i {
-    font-size: 2.5rem;
+    font-size: 2rem;
     position: absolute;
     top: 15px;
     right: 15px;
@@ -83,6 +98,7 @@ h2 { text-align: center; margin-bottom: 30px; font-weight: 700; }
 
 @media(max-width: 576px){
     .result-panel { padding: 1rem 1.5rem; }
+    .result-panel i { font-size: 1.5rem; }
 }
 </style>
 </head>
@@ -93,7 +109,7 @@ h2 { text-align: center; margin-bottom: 30px; font-weight: 700; }
     <h2>My Quiz Results</h2>
 
     <?php if (empty($results)): ?>
-        <p class="text-center text-light mt-4">You haven't attempted any quizzes yet.</p>
+        <p class="text-center text-gray-500 mt-4">You haven't attempted any quizzes yet.</p>
     <?php else: ?>
         <?php foreach ($results as $r): 
             $retake = ($r['score'] < ($r['total_questions'] / 2));
@@ -103,9 +119,9 @@ h2 { text-align: center; margin-bottom: 30px; font-weight: 700; }
         <div class="result-panel">
             <i class="bi bi-journal-check"></i>
             <h4><?= htmlspecialchars($r['quiz_title']) ?></h4>
-            <p>Score: <?= htmlspecialchars($r['score']) ?> / <?= htmlspecialchars($r['total_questions']) ?></p>
-            <p>Correct Answers: <?= htmlspecialchars($r['correct_answers']) ?></p>
-            <p>Date: <?= htmlspecialchars($r['attempted_at']) ?></p>
+            <p><strong>Score:</strong> <?= htmlspecialchars($r['score']) ?> / <?= htmlspecialchars($r['total_questions']) ?></p>
+            <p><strong>Correct Answers:</strong> <?= htmlspecialchars($r['correct_answers']) ?></p>
+            <p><strong>Date:</strong> <?= htmlspecialchars($r['attempted_at']) ?></p>
             <span class="badge <?= $status_class ?>"><?= $status_text ?></span>
             <?php if ($retake): ?>
                 <a href="quiz.php?quiz_id=<?= $r['quiz_id'] ?>" class="btn btn-light btn-sm">Retake Quiz</a>

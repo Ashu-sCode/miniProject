@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <style>
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #e0e7ff, #f0f4f8);
+    background: #f0f4f8;
     min-height: 100vh;
     margin: 0;
     color: #1f2937;

@@ -13,7 +13,7 @@ include '../includes/config.php';
 <style>
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #E0EAFC, #CFDEF3);
+    background: #f0f4f8;
     min-height: 100vh;
     margin: 0;
     color: #333;
