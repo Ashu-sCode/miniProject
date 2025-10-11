@@ -1,6 +1,6 @@
 <?php
 include '../includes/session_check.php';
-include '../includes/config.php'
+include '../includes/config.php';
 
 // Only admin
 if ($_SESSION['user_role'] !== 'admin') {
