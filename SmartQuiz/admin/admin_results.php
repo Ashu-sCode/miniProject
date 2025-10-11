@@ -5,7 +5,7 @@ include '../includes/config.php';
 // Only admin
 if ($_SESSION['user_role'] !== 'admin') {
     header("Location: ../login.php");
-    exit(
+    exit()
 }
 
 // Fetch quizzes for filter dropdown
