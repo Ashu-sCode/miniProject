@@ -1,6 +1,6 @@
 <?php
 include './includes/session_check.php';
-include './includes/config.php';
+include './includes/config.php'
 
 $logged_in_user_id = $_SESSION['user_id'] ?? null;
 
