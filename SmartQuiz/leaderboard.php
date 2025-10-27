@@ -1,4 +1,4 @@
-<?ph
+<?php
 include './includes/session_check.php';
 include './includes/config.php';
 
