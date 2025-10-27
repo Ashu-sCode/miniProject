@@ -4,7 +4,7 @@ include './includes/config.php';
 
 $logged_in_user_id = $_SESSION['user_id'] ?? null;
 
-// Fetch leaderboard: sum scores for all quizzes per user
+// Fetch leaderboard: sum scores for all quizzes per use
 $stmt = $conn->prepare("
     SELECT u.id AS user_id, u.name AS user_name, 
            SUM(r.score) AS total_score,
